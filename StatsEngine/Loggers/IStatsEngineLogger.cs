@@ -1,24 +1,14 @@
 ﻿using System;
-using CircularBuffer;
+using StatsEngine.Persistence;
 
-namespace StatsEngine.Loggers
+namespace StatsEngine.Logging
 {
-    interface IStatsEngineLogger<T> : IDisposable
+    interface IStatsEngineLogger : IDisposable
     {
         /// <summary>
-        /// Calls GetStat and passes its result to LogStat on every _logFrequency
+        /// Start collecting statistics and writing it to a buffer
         /// </summary>
-        void StartLogging(CircularBuffer<T> buf);
-
-        /// <summary>
-        /// Writes the given stat struct to the front of the circular buffer
-        /// </summary>
-        void LogStat(CircularBuffer<T> buf, T stat);
-
-        /// <summary>
-        /// Returns the stat
-        /// </summary>
-        T GetStat();
+        void StartLogging();
 
     }
 }

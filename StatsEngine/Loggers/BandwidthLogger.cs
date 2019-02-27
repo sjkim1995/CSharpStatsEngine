@@ -2,38 +2,22 @@
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using CircularBuffer;
+using StatsEngine.Persistence;
+using StatsEngine.Types;
 
-namespace StatsEngine.Loggers
+namespace StatsEngine.Logging
 {
-
-    public struct BandwidthStats
-    {
-        public DateTimeOffset IntervalStart { get; set; }
-
-        public DateTimeOffset IntervalEnd { get; set; }
-
-        public long WriteDelta { get; set; }
-
-        public long ReadDelta { get; set; }
-
-        public double MbitsReadPerSecond { get; set; }
-
-        public double MbitsWritePerSecond { get; set; }
-
-    }
-
-    class BandwidthLogger : IStatsEngineLogger<BandwidthStats>
+    class BandwidthLogger : IStatsEngineLogger
     {
         private TimeSpan _logFrequency;
-        private bool _writeToConsole;
+        private StatsBuffer<BandwidthStats> _buf;
 
         private bool _disposed;
         private long _previousReadBytes;
         private long _previousWriteBytes;
         DateTimeOffset _previousComputeTime;
 
-        public BandwidthLogger(TimeSpan logFrequency, bool writeToConsole = false)
+        public BandwidthLogger(TimeSpan logFrequency, StatsBuffer<BandwidthStats> buf)
         {
             if (logFrequency <= TimeSpan.Zero)
             {
@@ -41,13 +25,13 @@ namespace StatsEngine.Loggers
             }
 
             _logFrequency = logFrequency;
-            _writeToConsole = writeToConsole;
+            _buf = buf; 
 
             _previousComputeTime = DateTimeOffset.UtcNow;
             GetNetworkUsage(out _previousReadBytes, out _previousWriteBytes);
         }
 
-        public async void StartLogging(CircularBuffer<BandwidthStats> buf)
+        public async void StartLogging()
         {
             try
             {
@@ -55,9 +39,9 @@ namespace StatsEngine.Loggers
                 {
                     await Task.Delay(_logFrequency);
 
-                    var stat = GetStat();
+                    var stat = GetCurrentStat();
 
-                    LogStat(buf, stat);
+                    LogStat(stat);
                 }
             }
             catch (Exception e)
@@ -66,7 +50,7 @@ namespace StatsEngine.Loggers
             }
         }
 
-        public BandwidthStats GetStat()
+        public BandwidthStats GetCurrentStat()
         {
             const long bitsPerByte = 8;
             const double oneMeg = 1024 * 1024;
@@ -100,19 +84,9 @@ namespace StatsEngine.Loggers
             return stat;
         }
 
-        public void LogStat(CircularBuffer<BandwidthStats> buf, BandwidthStats stat)
+        public void LogStat(BandwidthStats stat)
         {
-            buf.PushFront(stat);
-
-            if (_writeToConsole)
-            {
-                Console.WriteLine("[{0}] BandWidth Usage ==> READ: {1} MBits/Sec, WRITE: {2} MBits/Sec",
-                                DateTimeOffset.UtcNow.ToString("u"),
-                                Math.Round(stat.MbitsReadPerSecond, 2),
-                                Math.Round(stat.MbitsWritePerSecond, 2)
-                                );
-            }
-            
+            _buf.AddStat(stat);      
         }
 
         private static void GetNetworkUsage(out long bytesRead, out long bytesWrite)

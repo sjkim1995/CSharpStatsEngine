@@ -2,34 +2,19 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using CircularBuffer;
+using StatsEngine.Persistence;
+using StatsEngine.Types;
 
-namespace StatsEngine.Loggers
+namespace StatsEngine.Logging
 {
-    public struct ThreadPoolStats
-    {
-        public DateTime TimeStamp { get; set; }
 
-        public int BusyIoThreads { get; set; }
-
-        public int MinIoThreads { get; set; }
-
-        public int MaxIoThreads { get; set; }
-
-        public int BusyWorkerThreads { get; set; }
-
-        public int MinWorkerThreads { get; set; }
-
-        public int MaxWorkerThreads { get; set; }
-    }
-
-    class ThreadPoolLogger : IStatsEngineLogger<ThreadPoolStats>
+    class ThreadPoolLogger : IStatsEngineLogger
     {
         private TimeSpan _logFrequency;
         private bool _disposed;
-        private bool _writeToConsole;
+        private StatsBuffer<ThreadPoolStats> _buf;
 
-        public ThreadPoolLogger(TimeSpan logFrequency, bool writeToConsole = false)
+        public ThreadPoolLogger(TimeSpan logFrequency, StatsBuffer<ThreadPoolStats> buf)
         {
             if (logFrequency <= TimeSpan.Zero)
             {
@@ -37,10 +22,10 @@ namespace StatsEngine.Loggers
             }
 
             _logFrequency = logFrequency;
-            _writeToConsole = writeToConsole;
+            _buf = buf;
         }
 
-        public async void StartLogging(CircularBuffer<ThreadPoolStats> buf)
+        public async void StartLogging()
         {
             try
             {
@@ -50,7 +35,7 @@ namespace StatsEngine.Loggers
 
                     var stat = GetStat();
 
-                    LogStat(buf, stat);
+                    LogStat(stat);
                 }
             }
             catch (Exception e)
@@ -59,21 +44,9 @@ namespace StatsEngine.Loggers
             }
         }
 
-        public virtual void LogStat(CircularBuffer<ThreadPoolStats> buf, ThreadPoolStats stat)
+        public virtual void LogStat(ThreadPoolStats stat)
         {
-            buf.PushFront(stat);
-
-            if (_writeToConsole)
-            {
-                string message = string.Format("[{0}] IOCP:(Busy={1},Min={2},Max={3}), WORKER:(Busy={4},Min={5},Max={6})",
-                                DateTimeOffset.UtcNow.ToString("u"),
-                                stat.BusyIoThreads, stat.MinIoThreads, stat.MaxIoThreads,
-                                stat.BusyWorkerThreads, stat.MinWorkerThreads, stat.MaxWorkerThreads
-                                );
-
-                Trace.WriteLine(message);
-            }
-            
+            _buf.AddStat(stat);         
         }
 
         /// <summary>

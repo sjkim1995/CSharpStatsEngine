@@ -1,6 +1,0 @@
-C:\Users\seki.REDMOND\source\repos\StatsEngine\ClassLibrary1\bin\Debug\ClassLibrary1.dll
-C:\Users\seki.REDMOND\source\repos\StatsEngine\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
-C:\Users\seki.REDMOND\source\repos\StatsEngine\ClassLibrary1\obj\Debug\CircularBuffer.csprojAssemblyReference.cache
-C:\Users\seki.REDMOND\source\repos\StatsEngine\ClassLibrary1\obj\Debug\CircularBuffer.csproj.CoreCompileInputs.cache
-C:\Users\seki.REDMOND\source\repos\StatsEngine\ClassLibrary1\obj\Debug\ClassLibrary1.dll
-C:\Users\seki.REDMOND\source\repos\StatsEngine\ClassLibrary1\obj\Debug\ClassLibrary1.pdb

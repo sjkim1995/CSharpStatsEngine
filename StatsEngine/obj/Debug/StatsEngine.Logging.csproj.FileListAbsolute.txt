@@ -1,0 +1,12 @@
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.Logging.csprojAssemblyReference.cache
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.Logging.csproj.CoreCompileInputs.cache
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.Logging.csproj.CopyComplete
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.StatTypes.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.StatTypes.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.Logging.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.Logging.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.Persistence.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.Persistence.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.Persistence.dll.config
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.Logging.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.Logging.pdb
