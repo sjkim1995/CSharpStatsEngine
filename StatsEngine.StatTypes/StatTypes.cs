@@ -1,9 +1,10 @@
-﻿namespace StatsEngine.Types
+﻿namespace StatsEngine.Shared.Types
 {
     public enum StatType
     {
         Bandwidth,
-        SystemCPU,
-        ThreadPool
+        CPU,
+        ThreadPool,
+        PageFaults
     }
 }

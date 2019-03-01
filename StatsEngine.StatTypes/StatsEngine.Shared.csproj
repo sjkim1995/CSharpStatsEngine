@@ -7,11 +7,12 @@
     <ProjectGuid>{73464F74-8030-4449-A747-F014F086D887}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StatsEngine.StatTypes</RootNamespace>
+    <RootNamespace>StatsEngine.Shared</RootNamespace>
     <AssemblyName>StatsEngine.StatTypes</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,10 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BandwidthStats.cs" />
+    <Compile Include="PageFaultStats.cs" />
+    <Compile Include="IMachineStat.cs" />
     <Compile Include="StatTypes.cs" />
     <Compile Include="ThreadPoolStats.cs" />
-    <Compile Include="SystsemCPUStats.cs" />
+    <Compile Include="CPUStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,14 +1,17 @@
 ﻿using System;
+using StatsEngine.Shared.Types;
 
 namespace StatsEngine.Persistence
 {
-    public class StatsBuffer<T>
+    public class StatsBuffer<T> where T : IMachineStat
     {
         CircularBuffer<T> buffer;
+        readonly StatType _statType; 
 
-        public StatsBuffer(int capacity)
+        public StatsBuffer(StatType statType, int capacity)
         {
             buffer = new CircularBuffer<T>(capacity);
+            _statType = statType;
         }
 
         /// <summary>
@@ -17,7 +20,7 @@ namespace StatsEngine.Persistence
         public int Size { get { return buffer.Size; } }
 
         /// <summary>
-        /// Maxium capacity of the stats buffer (as set when instantiating the buffer)
+        /// Maximum capacity of the stats buffer (as set when instantiating the buffer)
         /// </summary>
         public int Capacity { get { return buffer.Capacity; } }
 
@@ -35,15 +38,13 @@ namespace StatsEngine.Persistence
         /// Adds a stat to the front of the buffer
         /// </summary>
         public void AddStat(T item)
-        {
+        { 
+            // TODO: validate that type of machine stat matches the StatType
+
             buffer.PushFront(item);
 
             // for testing purposes
-            T[] arr = buffer.ToArray();
-            foreach (var stat in arr)
-            {
-                Console.WriteLine(stat.ToString());
-            }
+            Console.WriteLine(item.ToLogString());
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace StatsEngine.Persistence
         /// <summary>
         /// Returns the stat at the given index
         /// </summary>
-        public T GetIndex(int index)
+        public T GetStatAtIndex(int index)
         {
             return buffer._buffer[index];
         }

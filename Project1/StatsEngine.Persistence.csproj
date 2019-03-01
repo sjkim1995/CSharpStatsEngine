@@ -8,10 +8,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>StatsEngine.Persistence</RootNamespace>
     <AssemblyName>StatsEngine.Persistence</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,9 +45,9 @@
     <Compile Include="StatsBuffer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatsEngine.StatTypes\StatsEngine.Types.csproj">
+    <ProjectReference Include="..\StatsEngine.StatTypes\StatsEngine.Shared.csproj">
       <Project>{73464f74-8030-4449-a747-f014f086d887}</Project>
-      <Name>StatsEngine.Types</Name>
+      <Name>StatsEngine.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

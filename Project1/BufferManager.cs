@@ -1,30 +1,40 @@
-﻿using StatsEngine.Types;
+﻿using System;
 using System.Collections.Generic;
+using StatsEngine.Shared.Types;
 
 namespace StatsEngine.Persistence
 {
     public class BufferManager
     {
         private readonly int capacity;
-        public Dictionary<StatType, dynamic> bufferMap;
+        private Dictionary<StatType, StatsBuffer<IMachineStat>> bufferMap;
 
         public BufferManager(int capacity)
         {
             this.capacity = capacity;
 
-            CreateBufferMap();
+            InitBufferMap();
         }
 
-        private void CreateBufferMap()
+        private void InitBufferMap()
         {
-            bufferMap = new Dictionary<StatType, dynamic>
+            bufferMap = new Dictionary<StatType, StatsBuffer<IMachineStat>>();
+            
+            // Generate a buffer for each type of statistic we're collecting
+            foreach (StatType type in Enum.GetValues(typeof(StatType))) 
             {
-                // Add new buffers here...
-                { StatType.Bandwidth, new StatsBuffer<BandwidthStats>(capacity) },
-                { StatType.SystemCPU, new StatsBuffer<SystemCPUStats>(capacity) },
-                { StatType.ThreadPool, new StatsBuffer<ThreadPoolStats>(capacity) }
-            };
+                bufferMap.Add(type, new StatsBuffer<IMachineStat>(type, capacity));
+            }
         }
+
+        public StatsBuffer<IMachineStat> GetBuffer(StatType type)
+        {
+            return bufferMap[type];
+        }
+
+
+
+        
 
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace StatsEngine.Types
+namespace StatsEngine.Shared.Types
 {
-    public struct ThreadPoolStats
+    public class ThreadPoolStats : IMachineStat
     {
         public DateTimeOffset TimeStamp { get; set; }
 
@@ -18,7 +18,7 @@ namespace StatsEngine.Types
 
         public int MaxWorkerThreads { get; set; }
 
-        public string FormatToString()
+        public string ToLogString()
         {
             return string.Format("[{0}] IOCP:(Busy={1},Min={2},Max={3}), WORKER:(Busy={4},Min={5},Max={6})",
                             TimeStamp.ToString("u"),

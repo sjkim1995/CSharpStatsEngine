@@ -1,11 +1,12 @@
 ﻿using System;
 
-namespace StatsEngine.Types
+namespace StatsEngine.Shared.Types
 {
-    public struct BandwidthStats
+    public class BandwidthStats : IMachineStat
     {
         public DateTimeOffset IntervalStart { get; set; }
 
+        // Interval end
         public DateTimeOffset IntervalEnd { get; set; }
 
         public long WriteDelta { get; set; }
@@ -16,7 +17,7 @@ namespace StatsEngine.Types
 
         public double MbitsWritePerSecond { get; set; }
 
-        public string FormatToString()
+        public string ToLogString()
         {
             return string.Format("[{0}] BandWidth Usage ==> READ: {1} MBits/Sec, WRITE: {2} MBits/Sec",
                             IntervalEnd.ToString("u"),

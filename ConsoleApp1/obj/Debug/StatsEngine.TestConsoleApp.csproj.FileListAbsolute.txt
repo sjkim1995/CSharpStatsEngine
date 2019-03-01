@@ -12,3 +12,4 @@ C:\Users\seki.REDMOND\source\repos\StatsEngine\ConsoleApp1\obj\Debug\StatsEngine
 C:\Users\seki.REDMOND\source\repos\StatsEngine\ConsoleApp1\obj\Debug\StatsEngine.TestConsoleApp.csproj.CopyComplete
 C:\Users\seki.REDMOND\source\repos\StatsEngine\ConsoleApp1\obj\Debug\StatsEngine.ConsoleApp.exe
 C:\Users\seki.REDMOND\source\repos\StatsEngine\ConsoleApp1\obj\Debug\StatsEngine.ConsoleApp.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\ConsoleApp1\obj\Debug\StatsEngine.TestConsoleApp.csprojAssemblyReference.cache

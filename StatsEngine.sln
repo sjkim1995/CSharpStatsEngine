@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsEngine.Persistence", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F0EBB60F-C473-42A4-BC37-5AF6ABE28547}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsEngine.Types", "StatsEngine.StatTypes\StatsEngine.Types.csproj", "{73464F74-8030-4449-A747-F014F086D887}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsEngine.Shared", "StatsEngine.StatTypes\StatsEngine.Shared.csproj", "{73464F74-8030-4449-A747-F014F086D887}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsEngine.TestConsoleApp", "ConsoleApp1\StatsEngine.TestConsoleApp.csproj", "{73668B7B-1CCD-43AB-8739-0BDB6446A302}"
 EndProject

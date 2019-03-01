@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace StatsEngine.Types
+namespace StatsEngine.Shared.Types
 {
-    public struct SystemCPUStats
+    public class CPUStats : IMachineStat
     {
         public DateTimeOffset TimeStamp { get; set; }
 
         public double? CPU { get; set; }
 
-        public string FormatToString()
+        public string ToLogString()
         {
             return string.Format("[{0}] CPU: {1}%", TimeStamp.ToString("u"), CPU);
         }

@@ -1,0 +1,6 @@
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine.StatTypes\bin\Debug\StatsEngine.StatTypes.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine.StatTypes\bin\Debug\StatsEngine.StatTypes.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine.StatTypes\obj\Debug\StatsEngine.Shared.csprojAssemblyReference.cache
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine.StatTypes\obj\Debug\StatsEngine.Shared.csproj.CoreCompileInputs.cache
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine.StatTypes\obj\Debug\StatsEngine.StatTypes.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine.StatTypes\obj\Debug\StatsEngine.StatTypes.pdb

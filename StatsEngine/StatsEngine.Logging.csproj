@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StatsEngine.Logging</RootNamespace>
     <AssemblyName>StatsEngine.Logging</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,10 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Loggers\PageFaultLogger.cs" />
+    <Compile Include="Loggers\PageFaultLoggerHelpers\GenericPerSecondLogger.cs" />
+    <Compile Include="Loggers\PageFaultLoggerHelpers\PageFaultLogger.cs" />
     <Compile Include="LoggingManager.cs" />
     <Compile Include="Loggers\BandwidthLogger.cs" />
-    <Compile Include="Loggers\SystemCPULogger.cs" />
-    <Compile Include="Loggers\IStatsEngineLogger.cs" />
+    <Compile Include="Loggers\CPULogger.cs" />
+    <Compile Include="StatsEngineLogger.cs" />
     <Compile Include="Loggers\ThreadPoolLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,9 +57,9 @@
       <Project>{e738330b-fa89-4634-a777-36adf936e27a}</Project>
       <Name>StatsEngine.Persistence</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StatsEngine.StatTypes\StatsEngine.Types.csproj">
+    <ProjectReference Include="..\StatsEngine.StatTypes\StatsEngine.Shared.csproj">
       <Project>{73464f74-8030-4449-a747-f014f086d887}</Project>
-      <Name>StatsEngine.Types</Name>
+      <Name>StatsEngine.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

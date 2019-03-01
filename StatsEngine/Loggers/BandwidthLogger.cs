@@ -3,61 +3,28 @@ using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using StatsEngine.Persistence;
-using StatsEngine.Types;
+using StatsEngine.Shared.Types;
 
 namespace StatsEngine.Logging
 {
-    class BandwidthLogger : IStatsEngineLogger
+    class BandwidthLogger : StatsEngineLogger
     {
-        private TimeSpan _logFrequency;
-        private StatsBuffer<BandwidthStats> _buf;
-
-        private bool _disposed;
         private long _previousReadBytes;
         private long _previousWriteBytes;
         DateTimeOffset _previousComputeTime;
 
-        public BandwidthLogger(TimeSpan logFrequency, StatsBuffer<BandwidthStats> buf)
+        public BandwidthLogger(TimeSpan logFrequency, StatsBuffer<IMachineStat> buf) : base(logFrequency, buf)
         {
-            if (logFrequency <= TimeSpan.Zero)
-            {
-                throw new ArgumentOutOfRangeException("logFrequency");
-            }
-
-            _logFrequency = logFrequency;
-            _buf = buf; 
-
             _previousComputeTime = DateTimeOffset.UtcNow;
             GetNetworkUsage(out _previousReadBytes, out _previousWriteBytes);
         }
 
-        public async void StartLogging()
-        {
-            try
-            {
-                while (!_disposed)
-                {
-                    await Task.Delay(_logFrequency);
-
-                    var stat = GetCurrentStat();
-
-                    LogStat(stat);
-                }
-            }
-            catch (Exception e)
-            {
-                Trace.WriteLine(e);
-            }
-        }
-
-        public BandwidthStats GetCurrentStat()
+        public override IMachineStat GetStat()
         {
             const long bitsPerByte = 8;
             const double oneMeg = 1024 * 1024;
 
-            long bytesRead;
-            long bytesWrite;
-            GetNetworkUsage(out bytesRead, out bytesWrite);
+            GetNetworkUsage(out long bytesRead, out long bytesWrite);
 
             DateTimeOffset currentTime = DateTimeOffset.UtcNow;
             TimeSpan elapsed = currentTime - _previousComputeTime;
@@ -65,11 +32,13 @@ namespace StatsEngine.Logging
             long readDelta = (bytesRead - _previousReadBytes);
             long writeDelta = (bytesWrite - _previousWriteBytes);
 
-            var stat = new BandwidthStats();
-            stat.ReadDelta = readDelta;
-            stat.WriteDelta = writeDelta;
-            stat.IntervalStart = _previousComputeTime;
-            stat.IntervalEnd = currentTime;
+            var stat = new BandwidthStats
+            {
+                ReadDelta = readDelta,
+                WriteDelta = writeDelta,
+                IntervalStart = _previousComputeTime,
+                IntervalEnd = currentTime
+            };
 
             _previousReadBytes = bytesRead;
             _previousWriteBytes = bytesWrite;
@@ -82,11 +51,6 @@ namespace StatsEngine.Logging
             stat.MbitsWritePerSecond = mbitsWritePerSecond;
 
             return stat;
-        }
-
-        public void LogStat(BandwidthStats stat)
-        {
-            _buf.AddStat(stat);      
         }
 
         private static void GetNetworkUsage(out long bytesRead, out long bytesWrite)
@@ -110,11 +74,6 @@ namespace StatsEngine.Logging
             {
                 Trace.WriteLine(e);
             }
-        }
-
-        public void Dispose()
-        {
-            _disposed = true;
         }
     }
 }

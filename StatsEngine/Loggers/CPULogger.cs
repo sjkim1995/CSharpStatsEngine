@@ -1,58 +1,22 @@
 ﻿using StatsEngine.Persistence;
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using StatsEngine.Types;
+using StatsEngine.Shared.Types;
 
 
 namespace StatsEngine.Logging
 {
-    class SystemCPULogger : IStatsEngineLogger
+    class CPULogger : StatsEngineLogger
     {
-        private TimeSpan _logFrequency;
-        private StatsBuffer<SystemCPUStats> _buf;
+        public CPULogger(TimeSpan logFrequency, StatsBuffer<IMachineStat> buf) : base(logFrequency, buf)
+        {
+        }
 
-        private bool _disposed;
         static object staticLock = new object();
         static volatile PerformanceCounter _cpu;
         static volatile bool _disabled;
 
-        public SystemCPULogger(TimeSpan logFrequency, StatsBuffer<SystemCPUStats> buf)
-        {
-            if (logFrequency <= TimeSpan.Zero)
-            {
-                throw new ArgumentOutOfRangeException("logFrequency");
-            }
-
-            _logFrequency = logFrequency;
-            _buf = buf;
-        }
-
-        public async void StartLogging()
-        {
-            try
-            {
-                while (!_disposed)
-                {
-                    await Task.Delay(_logFrequency);
-
-                    var stat = GetStat();
-
-                    LogStat(stat);
-                }
-            }
-            catch (Exception e)
-            {
-                Trace.WriteLine(e);
-            }
-        }
-
-        public virtual void LogStat(SystemCPUStats stat)
-        {
-            _buf.AddStat(stat);
-        }
-
-        public SystemCPUStats GetStat()
+        public override IMachineStat GetStat()
         {
             float systemCPU;
             double? cpu = null;
@@ -62,9 +26,9 @@ namespace StatsEngine.Logging
                 cpu = Math.Round(systemCPU, 2);
             }
 
-            return new SystemCPUStats
+            return new CPUStats
             {
-                TimeStamp = DateTime.UtcNow,
+                TimeStamp = DateTimeOffset.UtcNow,
                 CPU = cpu
             };
         }
@@ -107,11 +71,6 @@ namespace StatsEngine.Logging
             }
 
             return false;
-        }
-
-        public void Dispose()
-        {
-            _disposed = true;
         }
     }
 }

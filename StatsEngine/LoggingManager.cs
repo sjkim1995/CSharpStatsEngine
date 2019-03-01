@@ -1,15 +1,15 @@
-﻿using StatsEngine.Logging;
-using StatsEngine.Persistence;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using StatsEngine.Types;
+using StatsEngine.Logging;
+using StatsEngine.Persistence;
+using StatsEngine.Shared.Types;
 
 namespace StatsEngine
 {
     public class LoggingManager
     {
         // Set of loggers/perf counters
-        private HashSet<IStatsEngineLogger> loggerSet;
+        private HashSet<StatsEngineLogger> loggerSet;
         private TimeSpan _logFrequency;
 
         private BufferManager bufMgr;
@@ -25,17 +25,18 @@ namespace StatsEngine
             bufMgr = bufferManager;
 
             // Instantiate loggerSet and add loggers
-            CreateLoggerSet();
+            InitLoggerSet();
         }
 
-        private void CreateLoggerSet()
+        private void InitLoggerSet()
         {
-            loggerSet = new HashSet<IStatsEngineLogger>
+            loggerSet = new HashSet<StatsEngineLogger>
             { 
                 // Add new loggers here...
-                new BandwidthLogger(_logFrequency, bufMgr.bufferMap[Types.StatType.Bandwidth]),
-                new SystemCPULogger(_logFrequency, bufMgr.bufferMap[Types.StatType.SystemCPU]),
-                new ThreadPoolLogger(_logFrequency, bufMgr.bufferMap[Types.StatType.ThreadPool])
+                new BandwidthLogger(_logFrequency, bufMgr.GetBuffer(StatType.Bandwidth)),
+                new CPULogger(_logFrequency, bufMgr.GetBuffer(StatType.CPU)),
+                new ThreadPoolLogger(_logFrequency, bufMgr.GetBuffer(StatType.ThreadPool)),
+                new PageFaultLogger(_logFrequency, bufMgr.GetBuffer(StatType.PageFaults))
             };
         }
 

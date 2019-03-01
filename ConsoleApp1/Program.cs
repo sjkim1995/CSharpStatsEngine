@@ -8,13 +8,13 @@ namespace StatsEngine.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var bufferManager = new BufferManager(10);
+            Console.WriteLine("Press any key to exit the program...\n");
+
+            var bufferManager = new BufferManager(30);
             var loggingManager = new LoggingManager(TimeSpan.FromSeconds(3), bufferManager);
 
-
-
             loggingManager.StartLoggers();
-
+            Console.ReadKey();
         }
     }
 }
