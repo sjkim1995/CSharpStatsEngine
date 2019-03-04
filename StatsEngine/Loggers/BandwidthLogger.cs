@@ -3,7 +3,7 @@ using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using StatsEngine.Persistence;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 
 namespace StatsEngine.Logging
 {

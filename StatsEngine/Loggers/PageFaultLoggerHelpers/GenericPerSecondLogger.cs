@@ -37,7 +37,7 @@ namespace StatsEngine.Logging
             this.includeCurrent = includeCurrent;
         }
 
-        virtual public Task<int> Log()
+        virtual public void Log()
         {
             EnsureInit();
             DateTime now = DateTime.UtcNow;
@@ -66,7 +66,6 @@ namespace StatsEngine.Logging
                 }
 
             }
-            return Task.FromResult(0);
         }
     }
 

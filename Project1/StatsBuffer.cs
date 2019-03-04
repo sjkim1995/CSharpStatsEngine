@@ -1,5 +1,5 @@
 ﻿using System;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 
 namespace StatsEngine.Persistence
 {

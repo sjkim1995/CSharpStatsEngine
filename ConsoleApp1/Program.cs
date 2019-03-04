@@ -1,6 +1,5 @@
 ﻿using System;
 using StatsEngine.Persistence;
-using StatsEngine.Logging;
 
 namespace StatsEngine.ConsoleApp
 {
@@ -10,10 +9,10 @@ namespace StatsEngine.ConsoleApp
         {
             Console.WriteLine("Press any key to exit the program...\n");
 
-            var bufferManager = new BufferManager(30);
-            var loggingManager = new LoggingManager(TimeSpan.FromSeconds(3), bufferManager);
+            var bufferManager = new BufferManager();
+            var loggingManager = new LoggingManager(bufferManager);
 
-            loggingManager.StartLoggers();
+            loggingManager.StartLogging();
             Console.ReadKey();
         }
     }

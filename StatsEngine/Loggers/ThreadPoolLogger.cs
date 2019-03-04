@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using StatsEngine.Persistence;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 
 namespace StatsEngine.Logging
 {

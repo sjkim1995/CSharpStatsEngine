@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StatsEngine.Shared.Types
+namespace StatsEngine.Shared
 {
     public class BandwidthStats : IMachineStat
     {

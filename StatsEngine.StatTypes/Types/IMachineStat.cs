@@ -1,4 +1,4 @@
-﻿namespace StatsEngine.Shared.Types
+﻿namespace StatsEngine.Shared
 {
     public interface IMachineStat
     {

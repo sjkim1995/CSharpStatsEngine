@@ -1,6 +1,6 @@
 ﻿using System;
 using StatsEngine.Persistence;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 using System.Runtime.InteropServices;
 
 namespace StatsEngine.Logging
@@ -12,12 +12,7 @@ namespace StatsEngine.Logging
 
         public PageFaultLogger(TimeSpan logFrequency, StatsBuffer<IMachineStat> buf) : base(logFrequency, buf)
         {
-            // OSX and Linux
-            if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                throw new NotImplementedException();
-            }
-            pfHelper = new PageFaultHelper(false);
+            pfHelper = new PageFaultHelper(logFrequency);
         } 
 
         public override IMachineStat GetStat()
@@ -26,7 +21,9 @@ namespace StatsEngine.Logging
             return new PageFaultStats
             {
                 TimeStamp = DateTimeOffset.UtcNow,
-                LastPageFaultsPerSecond = PageFaultHelper.LastPageFaultsPerSecond
+                LastHardPageFaultsPerSecond = PageFaultHelper.LastPageFaultsPerSecond,
+                PageReadsFaulted = PageFaultHelper.PageReadsFaulted,
+                PagesFaulted = PageFaultHelper.PagesFaulted
             };
 
         }

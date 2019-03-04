@@ -1,7 +1,7 @@
 ﻿using StatsEngine.Persistence;
 using System;
 using System.Diagnostics;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 
 
 namespace StatsEngine.Logging

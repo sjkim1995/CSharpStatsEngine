@@ -15,6 +15,10 @@ namespace StatsEngine.Logging
 
         public static uint LastPageFaultsPerSecond { get; protected set; }
 
+        public static uint PagesFaulted { get; protected set; }
+
+        public static uint PageReadsFaulted { get; protected set; }
+
         protected override void OnItemPSValue(int index, long value)
         {
             if (index == 0)
@@ -23,7 +27,7 @@ namespace StatsEngine.Logging
             }
         }
 
-        public PageFaultHelper(bool dummy) : base("Page faults per sec", new string[] { "faults", "reads" })
+        public PageFaultHelper(TimeSpan intervalInSeconds) : base("Page faults per sec", new string[] { "faults", "reads" }, Convert.ToInt32(intervalInSeconds.TotalSeconds))
         {
         }
 
@@ -31,6 +35,10 @@ namespace StatsEngine.Logging
         {
             uint pf, pfr;
             GetNumbers(out pf, out pfr);
+
+            PagesFaulted = pf;
+            PageReadsFaulted = pfr;
+
             d1 = pf;
             d2 = pfr;
             d3 = d4 = d5 = d6 = 0;

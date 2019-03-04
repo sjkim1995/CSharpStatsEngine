@@ -42,12 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BandwidthStats.cs" />
-    <Compile Include="PageFaultStats.cs" />
-    <Compile Include="IMachineStat.cs" />
-    <Compile Include="StatTypes.cs" />
-    <Compile Include="ThreadPoolStats.cs" />
-    <Compile Include="CPUStats.cs" />
+    <Compile Include="SEConstants.cs" />
+    <Compile Include="Types\BandwidthStats.cs" />
+    <Compile Include="Types\PageFaultStats.cs" />
+    <Compile Include="Types\IMachineStat.cs" />
+    <Compile Include="Types\StatTypes.cs" />
+    <Compile Include="Types\ThreadPoolStats.cs" />
+    <Compile Include="Types\CPUStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

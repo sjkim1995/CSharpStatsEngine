@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using StatsEngine.Persistence;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 
 namespace StatsEngine.Logging
 {
@@ -53,12 +53,10 @@ namespace StatsEngine.Logging
             _buf.AddStat(stat);
         }
 
-
         /// <summary>
         /// Returns an IMachineStat about the system (threadpool, bandwidth, CPU, etc.)
         /// </summary>
         public abstract IMachineStat GetStat();
-
 
         /// <summary>
         /// Stops logging when called

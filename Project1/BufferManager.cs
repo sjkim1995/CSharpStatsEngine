@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 
 namespace StatsEngine.Persistence
 {
@@ -14,6 +14,10 @@ namespace StatsEngine.Persistence
             this.capacity = capacity;
 
             InitBufferMap();
+        }
+
+        public BufferManager() : this(SEConstants.DefaultBufferSize)
+        {
         }
 
         private void InitBufferMap()
@@ -31,10 +35,5 @@ namespace StatsEngine.Persistence
         {
             return bufferMap[type];
         }
-
-
-
-        
-
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using StatsEngine.Logging;
 using StatsEngine.Persistence;
-using StatsEngine.Shared.Types;
+using StatsEngine.Shared;
 
 namespace StatsEngine
 {
@@ -14,7 +14,7 @@ namespace StatsEngine
 
         private BufferManager bufMgr;
 
-        public LoggingManager(TimeSpan logFrequency, BufferManager bufferManager)
+        public LoggingManager(BufferManager bufferManager, TimeSpan logFrequency)
         {
             if (logFrequency <= TimeSpan.Zero)
             {
@@ -26,6 +26,10 @@ namespace StatsEngine
 
             // Instantiate loggerSet and add loggers
             InitLoggerSet();
+        }
+
+        public LoggingManager(BufferManager bufferManager) : this(bufferManager, TimeSpan.FromSeconds(SEConstants.DefaultLogInterval))
+        {
         }
 
         private void InitLoggerSet()
@@ -40,7 +44,7 @@ namespace StatsEngine
             };
         }
 
-        public void StartLoggers()
+        public void StartLogging()
         {
             foreach (var logger in loggerSet)
             {
