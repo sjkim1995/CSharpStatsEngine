@@ -1,0 +1,9 @@
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\StatsEngine.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.csprojAssemblyReference.cache
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.csproj.CoreCompileInputs.cache
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\ClassLibrary1.dll
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\bin\Debug\ClassLibrary1.pdb
+C:\Users\seki.REDMOND\source\repos\StatsEngine\StatsEngine\obj\Debug\StatsEngine.csproj.CopyComplete
